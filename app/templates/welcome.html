@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Summary | GUDLFT Registration{% endblock %}
+
+{% block header %}
+    <div class="d-flex align-items-lg-center">
+        <div class="col">
+            <h2 style="padding-right: 2rem;">Welcome, {{ club['email'] }}</h2>
+        </div>
+        <div class="col">
+            <a class="btn btn-outline-dark" href="{{ url_for('routes.logout') }}">Logout</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div style="padding: 2rem;">
+        <p>Points available: {{ club['points'] }}</p>
+        <h3>Competitions:</h3>
+        <ul>
+            {% for comp in competitions %}
+                <li>
+                    {{ comp['name'] }}<br>
+                    Date: {{ comp['date'] }}<br>
+                    Number of Places: {{ comp['number_of_places'] }}
+                    {% if comp['number_of_places']|int > 0 %}
+                    <a href="{{ url_for('routes.show_booking', competition=comp['name'], club=club['name']) }}">Book Places</a>
+                    {% endif %}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
