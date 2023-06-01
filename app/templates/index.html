@@ -1,16 +1,18 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GUDLFT Registration</title>
-</head>
-<body>
-    <h1>Welcome to the GUDLFT Registration Portal!</h1>
-    Please enter your secretary email to continue:
+{% extends 'base.html' %}
+
+{% block title %}GUDLFT Registration{% endblock %}
+
+{% block header %}<h1>Welcome to the GUDLFT Registration Portal!</h1>{% endblock %}
+
+{% block content %}
+<div style="padding: 2rem;">
+    <h3>Please enter your secretary email to continue:</h3>
     <form action="show_summary" method="post">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id=""/>
-        <button type="submit">Enter</button>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" name="email" id="email" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Enter</button>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}
