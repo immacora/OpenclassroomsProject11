@@ -2,17 +2,40 @@ from flask import Blueprint, render_template, request, redirect, flash, url_for
 from .models import models
 
 routes = Blueprint('routes', __name__)
+clubs = models.clubs
+competitions = models.competitions
 
 
-@routes.route('/')
+@routes.route('/', methods=['GET'])
 def index():
+    """Entry point to Flask application displaying login form."""
     return render_template('index.html')
 
 
 @routes.route('/show_summary', methods=['POST'])
 def show_summary():
-    logged_club = models.get_club_by_email(request.form['email'])
-    return render_template('welcome.html', club=logged_club, competitions=models.competitions)
+    """
+    Route used for login with email to Flask application configured for testing.
+    parameters:
+        clubs: list
+        competitions: list
+    responses:
+        500: none clubs or competitions, return index.
+        400: email not found, return index.html.
+        200: user is logged in, return welcome.html.
+    """
+    if not clubs or not competitions:
+        flash("500 Internal server error. \
+              Sorry, something went wrong. \
+              Please try again later and contact us if it persists.")
+        return render_template('index.html'), 500
+
+    logged_club = models.get_club_by_email(request.form['email'], clubs)
+    if logged_club:
+        return render_template('welcome.html', club=logged_club, competitions=competitions)
+
+    flash("Sorry, that email was not found.")
+    return render_template('index.html'), 400
 
 
 @routes.route('/show_booking/<competition>/<club>', methods=['GET'])
