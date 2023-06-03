@@ -7,31 +7,48 @@ COMPETITIONS_DATA = BASE_DIR.joinpath('competitions.json')
 
 
 def load_clubs():
-    with open(CLUBS_DATA) as c:
-        clubs = json.load(c)['clubs']
-        return clubs
+    """Returns list of the test application's clubs.json file."""
+    try:
+        with open(CLUBS_DATA) as c:
+            clubs = json.load(c)['clubs']
+            return clubs
+    except FileNotFoundError as e:
+        print("Failed to load clubs:", e)
 
 
 def load_competitions():
-    with open(COMPETITIONS_DATA) as comps:
-        competitions = json.load(comps)['competitions']
-        return competitions
+    """Returns list of the test application's competitions.json file."""
+    try:
+        with open(COMPETITIONS_DATA) as comps:
+            competitions = json.load(comps)['competitions']
+            return competitions
+    except FileNotFoundError as e:
+        print("Failed to load competitions:", e)
 
 
 clubs = load_clubs()
 competitions = load_competitions()
 
 
-def get_club_by_email(email):
-    logged_club = [club for club in clubs if club['email'] == email][0]
-    return logged_club
+def get_club_by_email(email, clubs):
+    """Returns the club found by email."""
+    try:
+        return [club for club in clubs if club['email'] == email][0]
+    except IndexError as e:
+        print("Email not found:", e)
 
 
 def get_club_by_name(club_name):
-    club_found = [c for c in clubs if c['name'] == club_name][0]
-    return club_found
+    """Returns the club found by name."""
+    try:
+        return [c for c in clubs if c['name'] == club_name][0]
+    except IndexError as e:
+        print("Club not found:", e)
 
 
 def get_competition_by_name(competition_name):
-    competition_found = [c for c in competitions if c['name'] == competition_name][0]
-    return competition_found
+    """Returns the competition found by name."""
+    try:
+        return [c for c in competitions if c['name'] == competition_name][0]
+    except IndexError as e:
+        print("Competition not found:", e)
