@@ -18,7 +18,7 @@ def calculate_substraction(number, number_to_subtract):
 
 def calculate_remaining_points_and_places(requested_places, club_points, competition_places):
     """
-    Checks if requested places is a positive integer less than or equal to club points and competition places and return calculated remaining points and places.
+    Checks if requested places is a positive integer less than or equal to club points and 12 max competition places and return calculated remaining points and places.
     Parameters:
         requested_places (str): The number to subtract from club points and competition places
         club_points (str): The number of club points available
@@ -30,6 +30,10 @@ def calculate_remaining_points_and_places(requested_places, club_points, competi
     requested_places = get_plus_integer_value(requested_places)
 
     if not isinstance(requested_places, str):
+
+        if requested_places > 12:
+            return "You cannot reserve more than 12 places per competition."
+
         remaining_club_points = calculate_substraction(int(club_points), requested_places)
         remaining_competition_places = calculate_substraction(int(competition_places), requested_places)
 
@@ -43,4 +47,5 @@ def calculate_remaining_points_and_places(requested_places, club_points, competi
                 "remaining_club_points": remaining_club_points,
                 "remaining_competition_places": remaining_competition_places
             }
+
     return requested_places

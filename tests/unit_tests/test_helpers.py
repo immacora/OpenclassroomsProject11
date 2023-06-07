@@ -74,3 +74,6 @@ class TestCalculateRemainingPointsAndPlaces:
 
     def test_with_higher_requested_places_than_competition_places_should_return_error_message(self):
         assert helpers.calculate_remaining_points_and_places("11", "11", self.competition_places) == "There are not enough places for the competition."
+
+    def test_with_requested_places_more_than_12_should_return_error_message(self):
+        assert helpers.calculate_remaining_points_and_places("13", "20", "25") == "You cannot reserve more than 12 places per competition."

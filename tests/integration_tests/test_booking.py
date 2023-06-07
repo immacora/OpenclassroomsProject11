@@ -123,8 +123,8 @@ class TestBookingRoute:
         """
         request_form = {
             "club": "TEST club with 20 points",
-            "competition": "Fall Classic",
-            "places": "14"
+            "competition": "Competition with less than 12 places",
+            "places": "12"
         }
         mocker.patch.object(models, 'clubs', clubs_db_test)
         mocker.patch.object(models, 'competitions', competitions_db_test)
@@ -133,6 +133,25 @@ class TestBookingRoute:
         assert b"There are not enough places for the competition." in response.data
         assert b"Points available: 20" in response.data
         assert b"Number of Places: 13" in response.data
+
+    def test_route_failed_with_more_than_12_requested_places(self, client, mocker, clubs_db_test, competitions_db_test):
+        """
+        GIVEN valid club and competition names with number of requested_places greater than 12
+        WHEN the '/booking' page is posted to (POST)
+        THEN checks the response is valid and a '400' status code is returned with error message
+        """
+        request_form = {
+            "club": "TEST club with 20 points",
+            "competition": "Spring Festival",
+            "places": "13"
+        }
+        mocker.patch.object(models, 'clubs', clubs_db_test)
+        mocker.patch.object(models, 'competitions', competitions_db_test)
+        response = client.post('/booking', data=request_form)
+        assert response.status_code == 400
+        assert b"You cannot reserve more than 12 places per competition." in response.data
+        assert b"Points available: 20" in response.data
+        assert b"Number of Places: 25" in response.data
 
     def test_route_success(self, client, mocker, test_club, test_competition):
         """

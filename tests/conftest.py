@@ -27,7 +27,7 @@ def clubs_db_test():
             "points":"12"
         },
         {   "name":"TEST club with 20 points",
-            "email": "TESTclub with 20 points@20 points.com",
+            "email": "TESTclubwith20points@20points.com",
             "points":"20"
         }
     ]
@@ -45,6 +45,11 @@ def competitions_db_test():
             "name": "Fall Classic",
             "date": "2020-10-22 13:30:00",
             "number_of_places": "13"
+        },
+        {
+            "name": "Competition with less than 12 places",
+            "date": "2020-10-22 13:30:00",
+            "number_of_places": "10"
         }
     ]
 
