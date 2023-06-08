@@ -46,6 +46,21 @@ class TestCalculateSubstraction:
         assert helpers.calculate_substraction(2, self.requested_places) is None
 
 
+class TestCheckCompetitionDate:
+    """
+    GIVEN str date
+    WHEN user wants to books places for past competition
+    THEN checks the return is True (current competition) or an error message (past competition)
+    """
+    def test_with_current_competition_date_should_return_true(self):
+        current_competition_date = "2024-10-22 13:30:00"
+        assert helpers.check_competition_date(current_competition_date) is True
+
+    def test_with_past_competition_date_should_return_error_message(self):
+        past_competition_date = "2020-10-22 13:30:00"
+        assert helpers.check_competition_date(past_competition_date) == "You cannot reserve places for past competitions."
+
+
 class TestCalculateRemainingPointsAndPlaces:
     """
     GIVEN three str values

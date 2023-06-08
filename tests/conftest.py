@@ -38,16 +38,21 @@ def competitions_db_test():
     return [
         {
             "name": "Spring Festival",
-            "date": "2020-03-27 10:00:00",
+            "date": "2024-03-27 10:00:00",
             "number_of_places": "25"
         },
         {
             "name": "Fall Classic",
-            "date": "2020-10-22 13:30:00",
+            "date": "2024-10-22 13:30:00",
             "number_of_places": "13"
         },
         {
             "name": "Competition with less than 12 places",
+            "date": "2024-10-22 13:30:00",
+            "number_of_places": "10"
+        },
+        {
+            "name": "PAST Competition",
             "date": "2020-10-22 13:30:00",
             "number_of_places": "10"
         }
@@ -67,7 +72,7 @@ def test_club():
 def test_competition():
     return {
         "name": "Fall Classic",
-        "date": "2020-10-22 13:30:00",
+        "date": "2024-10-22 13:30:00",
         "number_of_places": "13"
     }
 

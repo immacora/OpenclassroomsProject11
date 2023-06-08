@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def get_plus_integer_value(value):
     """Return positive number or error message."""
     try:
@@ -14,6 +17,12 @@ def calculate_substraction(number, number_to_subtract):
         return result
     else:
         return None
+
+
+def check_competition_date(competition_date):
+    now = datetime.now()
+    competition_date = datetime.strptime(competition_date, "%Y-%m-%d %H:%M:%S")
+    return True if competition_date > now else "You cannot reserve places for past competitions."
 
 
 def calculate_remaining_points_and_places(requested_places, club_points, competition_places):

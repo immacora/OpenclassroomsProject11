@@ -153,9 +153,28 @@ class TestBookingRoute:
         assert b"Points available: 20" in response.data
         assert b"Number of Places: 25" in response.data
 
+    def test_route_failed_with_past_competition(self, client, mocker, clubs_db_test, competitions_db_test):
+        """
+        GIVEN valid club and competition names with valid number of requested_places and past competition date
+        WHEN the '/booking' page is posted to (POST)
+        THEN checks the response is valid and a '400' status code is returned with error message
+        """
+        request_form = {
+            "club": "She Lifts",
+            "competition": "PAST Competition",
+            "places": "5"
+        }
+        mocker.patch.object(models, 'clubs', clubs_db_test)
+        mocker.patch.object(models, 'competitions', competitions_db_test)
+        response = client.post('/booking', data=request_form)
+        assert response.status_code == 400
+        assert b"You cannot reserve places for past competitions." in response.data
+        assert b"Points available: 12" in response.data
+        assert b"Number of Places: 10" in response.data
+
     def test_route_success(self, client, mocker, test_club, test_competition):
         """
-        GIVEN valid club and competition names with correct number of requested_places
+        GIVEN valid club and competition names with valid number of requested_places
         WHEN the '/booking' page is posted to (POST)
         THEN checks that response is valid and booking is complete
         """
