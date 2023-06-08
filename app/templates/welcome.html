@@ -23,7 +23,7 @@
                     {{ comp['name'] }}<br>
                     Date: {{ comp['date'] }}<br>
                     Number of Places: {{ comp['number_of_places'] }}
-                    {% if comp['number_of_places']|int > 0 and club['points']|int > 0 %}
+                    {% if comp['number_of_places']|int > 0 and club['points']|int > 0 and comp['date']|check_competition_date == True %}
                     <a href="{{ url_for('routes.show_booking', competition=comp['name'], club=club['name']) }}">Book Places</a>
                     {% endif %}
                 </li>

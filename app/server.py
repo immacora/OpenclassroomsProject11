@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, flash, url_for
 from .models import models
-from .helpers import calculate_remaining_points_and_places
+from .helpers import calculate_remaining_points_and_places, check_competition_date
 
 routes = Blueprint('routes', __name__)
 clubs = models.clubs
@@ -66,24 +66,30 @@ def booking():
     Books the number of competition places for the club and the competition filled in the form.
     responses:
         200: club and competition found with correct number of requested_places, return welcome.html.
-        400: bad request for number of requested_places, return welcome.html.
+        400: bad request for number of requested_places and past competition, return welcome.html.
         400: no club or competition matches data request.form, return index.html.
     """
     club_found = models.get_club_by_name(request.form['club'])
     competition_found = models.get_competition_by_name(request.form['competition'])
 
     if club_found and competition_found:
-        remaining_points_and_places = calculate_remaining_points_and_places(request.form['places'], club_found['points'], competition_found['number_of_places'])
+        current_competition = check_competition_date(competition_found['date'])
 
-        if not isinstance(remaining_points_and_places, str):
-            club_found['points'] = remaining_points_and_places.get("remaining_club_points")
-            competition_found['number_of_places'] = remaining_points_and_places.get("remaining_competition_places")
-            requested_places = remaining_points_and_places.get("requested_places")
-            flash(f"Great-booking complete for {requested_places} places!")
-            return render_template('welcome.html', club=club_found, competitions=competitions)
+        if not isinstance(current_competition, str):
+            remaining_points_and_places = calculate_remaining_points_and_places(request.form['places'], club_found['points'], competition_found['number_of_places'])
+
+            if not isinstance(remaining_points_and_places, str):
+                club_found['points'] = remaining_points_and_places.get("remaining_club_points")
+                competition_found['number_of_places'] = remaining_points_and_places.get("remaining_competition_places")
+                requested_places = remaining_points_and_places.get("requested_places")
+                flash(f"Great-booking complete for {requested_places} places!")
+                return render_template('welcome.html', club=club_found, competitions=competitions)
+            else:
+                flash(remaining_points_and_places)
         else:
-            flash(remaining_points_and_places)
-            return render_template('welcome.html', club=club_found, competitions=competitions), 400
+            flash(current_competition)
+
+        return render_template('welcome.html', club=club_found, competitions=competitions), 400
 
     flash("Something went wrong. Please try again or contact us if it persists.")
     return redirect(url_for('routes.index')), 400
