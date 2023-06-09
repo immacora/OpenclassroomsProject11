@@ -13,22 +13,24 @@ def client():
 def clubs_db_test():
     return [
         {
-            "name":"Simply Lift",
-            "email":"john@simplylift.co",
-            "points":"13"
+            "name": "Simply Lift",
+            "email": "john@simplylift.co",
+            "points": "13"
         },
         {
-            "name":"Iron Temple",
+            "name": "Iron Temple",
             "email": "admin@irontemple.com",
-            "points":"4"
+            "points": "4"
         },
-        {   "name":"She Lifts",
+        {
+            "name": "She Lifts",
             "email": "kate@shelifts.co.uk",
-            "points":"12"
+            "points": "12"
         },
-        {   "name":"TEST club with 20 points",
+        {
+            "name": "TEST club with 20 points",
             "email": "TESTclubwith20points@20points.com",
-            "points":"20"
+            "points": "20"
         }
     ]
 
@@ -62,9 +64,9 @@ def competitions_db_test():
 @pytest.fixture
 def test_club():
     return {
-        "name":"Iron Temple",
+        "name": "Iron Temple",
         "email": "admin@irontemple.com",
-        "points":"4"
+        "points": "4"
     }
 
 

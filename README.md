@@ -11,7 +11,7 @@
 
     * Python v3.x+
 
-    * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+    * [Flask](https://flask.palletsprojects.com/en/2.3.x/)
 
         Whereas Django does a lot of things for us out of the box, Flask allows us to add only what we need. 
      
@@ -44,8 +44,20 @@
 
 5. Testing
 
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
+    The tests were performed using [pytest](https://pypi.org/project/pytest/) and [pytest-mock](https://pypi.org/project/pytest-mock/).
+    To run all tests with details, type: `pytest -v`
+    To run one module tests with details (ex. models), type: `pytest -v tests/unit_tests/test_models.py`
 
-    We also like to show how well we're testing, so there's a module called 
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
+    To generate a test report with [coverage](https://pypi.org/project/coverage/), type: `coverage report -m` or `coverage html`
 
+    The performance tests were performed using [locust](https://pypi.org/project/locust/) and specific clubs and competitions data allowing 10 000 entries.
+    To generate a performance report with [locust](https://pypi.org/project/locust/):
+        run app `py runserver.py`
+        got to locust directory `cd tests\performance_tests`
+        type `locust`
+        launch your browser at `http://localhost:8089/`
+        run test with number of users: 6 and your host
+
+6. PEP 8
+
+    To generate a flake8 report, type: `flake8 --format=html --htmldir=flake-report`

@@ -19,6 +19,11 @@
             "name": "PAST Competition",
             "date": "2020-10-22 13:30:00",
             "number_of_places": "10"
+        },
+        {
+            "name": "LOCUST Competition with 1000 places",
+            "date": "2024-10-22 13:30:00",
+            "number_of_places": "1000"
         }
     ]
 }

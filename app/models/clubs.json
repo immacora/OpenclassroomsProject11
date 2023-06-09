@@ -19,6 +19,11 @@
             "name": "TEST club with 20 points",
             "email": "TESTclubwith20points@20points.com",
             "points": "20"
+        },
+        {
+            "name": "TEST LOCUST club with 1000 points",
+            "email": "TESTLOCUSTclubwith1000points@1000points.com",
+            "points": "1000"
         }
     ]
 }
