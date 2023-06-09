@@ -57,6 +57,10 @@
         type `locust`
         launch your browser at `http://localhost:8089/`
         run test with number of users: 6 and your host
+   
+   ![Coverage_report](https://github.com/immacora/OpenclassroomsProject11/assets/76613773/7bf2a29b-953c-441c-abe6-fbae7f00115f)
+   
+   ![Locust_report](https://github.com/immacora/OpenclassroomsProject11/assets/76613773/e685fef8-1678-4bf7-b400-24b99ed1c7b5)
 
 6. PEP 8
 
