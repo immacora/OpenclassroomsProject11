@@ -27,7 +27,8 @@ def check_competition_date(competition_date):
 
 def calculate_remaining_points_and_places(requested_places, club_points, competition_places):
     """
-    Checks if requested places is a positive integer less than or equal to club points and 12 max competition places and return calculated remaining points and places.
+    Checks if requested places is a positive integer less than or equal to club points
+    and 12 max competition places and return calculated remaining points and places.
     Parameters:
         requested_places (str): The number to subtract from club points and competition places
         club_points (str): The number of club points available

@@ -58,14 +58,17 @@ class TestCheckCompetitionDate:
 
     def test_with_past_competition_date_should_return_error_message(self):
         past_competition_date = "2020-10-22 13:30:00"
-        assert helpers.check_competition_date(past_competition_date) == "You cannot reserve places for past competitions."
+        assert helpers.check_competition_date(
+            past_competition_date
+            ) == "You cannot reserve places for past competitions."
 
 
 class TestCalculateRemainingPointsAndPlaces:
     """
     GIVEN three str values
     WHEN user wants to books places
-    THEN checks the return is a dict containing positive integers for requested_places, remaining_club_points, remaining_competition_places or an error message
+    THEN checks the return is a dict containing positive integers for requested_places,
+    remaining_club_points, remaining_competition_places or an error message.
     """
     club_points = "4"
     competition_places = "10"
@@ -76,19 +79,31 @@ class TestCalculateRemainingPointsAndPlaces:
             "remaining_club_points": 0,
             "remaining_competition_places": 6
         }
-        assert helpers.calculate_remaining_points_and_places("4", self.club_points, self.competition_places) == expected_value
+        assert helpers.calculate_remaining_points_and_places(
+            "4", self.club_points, self.competition_places
+        ) == expected_value
 
     def test_with_negative_requested_places_should_return_error_message(self):
-        assert helpers.calculate_remaining_points_and_places("-4", self.club_points, self.competition_places) == "Please, enter a positive number."
+        assert helpers.calculate_remaining_points_and_places(
+            "-4", self.club_points, self.competition_places
+        ) == "Please, enter a positive number."
 
     def test_with_no_int_requested_places_should_return_error_message(self):
-        assert helpers.calculate_remaining_points_and_places("!", self.club_points, self.competition_places) == "Please, enter a number."
+        assert helpers.calculate_remaining_points_and_places(
+            "!", self.club_points, self.competition_places
+        ) == "Please, enter a number."
 
     def test_with_higher_requested_places_than_club_points_should_return_error_message(self):
-        assert helpers.calculate_remaining_points_and_places("5", self.club_points, self.competition_places) == "You have not enough points."
+        assert helpers.calculate_remaining_points_and_places(
+            "5", self.club_points, self.competition_places
+        ) == "You have not enough points."
 
     def test_with_higher_requested_places_than_competition_places_should_return_error_message(self):
-        assert helpers.calculate_remaining_points_and_places("11", "11", self.competition_places) == "There are not enough places for the competition."
+        assert helpers.calculate_remaining_points_and_places(
+            "11", "11", self.competition_places
+        ) == "There are not enough places for the competition."
 
     def test_with_requested_places_more_than_12_should_return_error_message(self):
-        assert helpers.calculate_remaining_points_and_places("13", "20", "25") == "You cannot reserve more than 12 places per competition."
+        assert helpers.calculate_remaining_points_and_places(
+            "13", "20", "25"
+        ) == "You cannot reserve more than 12 places per competition."

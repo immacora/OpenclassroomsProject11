@@ -58,7 +58,9 @@ class TestBookingRoute:
         assert response.status_code == 400
         assert self.redirect_message in response.data
 
-    def test_route_failed_with_no_number_of_requested_places(self, client, mocker, clubs_db_test, competitions_db_test):
+    def test_route_failed_with_no_number_of_requested_places(
+            self, client, mocker, clubs_db_test, competitions_db_test
+            ):
         """
         GIVEN valid club and competition names with no number of requested_places
         WHEN the '/booking' page is posted to (POST)
@@ -77,7 +79,9 @@ class TestBookingRoute:
         assert self.initial_points in response.data
         assert self.initial_places in response.data
 
-    def test_route_failed_with_negative_number_of_requested_places(self, client, mocker, clubs_db_test, competitions_db_test):
+    def test_route_failed_with_negative_number_of_requested_places(
+            self, client, mocker, clubs_db_test, competitions_db_test
+            ):
         """
         GIVEN valid club and competition names with negative number of requested_places
         WHEN the '/booking' page is posted to (POST)
@@ -115,7 +119,9 @@ class TestBookingRoute:
         assert self.initial_points in response.data
         assert self.initial_places in response.data
 
-    def test_route_failed_with_not_enough_competition_places(self, client, mocker, clubs_db_test, competitions_db_test):
+    def test_route_failed_with_not_enough_competition_places(
+            self, client, mocker, clubs_db_test, competitions_db_test
+            ):
         """
         GIVEN valid club and competition names with number of requested_places greater than competition places
         WHEN the '/booking' page is posted to (POST)
@@ -134,7 +140,9 @@ class TestBookingRoute:
         assert b"Points available: 20" in response.data
         assert b"Number of Places: 13" in response.data
 
-    def test_route_failed_with_more_than_12_requested_places(self, client, mocker, clubs_db_test, competitions_db_test):
+    def test_route_failed_with_more_than_12_requested_places(
+            self, client, mocker, clubs_db_test, competitions_db_test
+            ):
         """
         GIVEN valid club and competition names with number of requested_places greater than 12
         WHEN the '/booking' page is posted to (POST)

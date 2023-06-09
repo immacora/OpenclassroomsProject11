@@ -76,7 +76,8 @@ def show_booking(competition, club):
     if club_found and competition_found:
         return render_template('booking.html', club=club_found, competition=competition_found)
 
-    flash("The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.")
+    flash("The requested URL was not found on the server.\
+          If you entered the URL manually please check your spelling and try again.")
     return redirect(url_for('routes.index')), 404
 
 
@@ -96,7 +97,11 @@ def booking():
         current_competition = check_competition_date(competition_found['date'])
 
         if not isinstance(current_competition, str):
-            remaining_points_and_places = calculate_remaining_points_and_places(request.form['places'], club_found['points'], competition_found['number_of_places'])
+            remaining_points_and_places = calculate_remaining_points_and_places(
+                request.form['places'],
+                club_found['points'],
+                competition_found['number_of_places']
+                )
 
             if not isinstance(remaining_points_and_places, str):
                 club_found['points'] = remaining_points_and_places.get("remaining_club_points")

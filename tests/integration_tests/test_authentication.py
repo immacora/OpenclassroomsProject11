@@ -33,7 +33,7 @@ class TestAuthentication:
 
     def test_login_route_failed_with_invalid_data_file(self, client, mocker, login_email):
         """
-        GIVEN a existing user email with a wrong mock for data file for login to Flask application configured for testing
+        GIVEN a existing user email with a wrong mock for data file to login
         WHEN the '/show_summary' page is posted to (POST)
         THEN checks the response is valid, '500' status code is returned and error message is displayed
         """

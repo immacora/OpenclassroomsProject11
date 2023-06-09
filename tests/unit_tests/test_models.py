@@ -131,7 +131,6 @@ class TestCompetitions:
         mocker.patch.object(models, 'competitions', competitions_db_test)
         assert models.get_competition_by_name("Fall Classic") == test_competition
 
-
     def test_get_competition_by_name_should_return_none_with_IndexError(self, mocker, competitions_db_test):
         """
         GIVEN a wrong competition name
