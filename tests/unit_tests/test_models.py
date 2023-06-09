@@ -68,6 +68,36 @@ class TestClubs:
         mocker.patch.object(models, 'clubs', clubs_db_test)
         assert models.get_club_by_name("TEST") is None
 
+    def test_get_club_points_dict_should_return_club_points_list_of_dicts(self, mocker, clubs_db_test):
+        """
+        GIVEN list of clubs dict
+        WHEN user access to index.html page
+        THEN checks the return is the list of points by club
+        """
+        expected_value = [
+            {'name': 'Simply Lift', 'points': '13'},
+            {'name': 'Iron Temple', 'points': '4'},
+            {'name': 'She Lifts', 'points': '12'},
+            {'name': 'TEST club with 20 points', 'points': '20'}
+        ]
+        mocker.patch.object(models, 'clubs', clubs_db_test)
+        assert models.get_club_points_dict(clubs_db_test) == expected_value
+
+    def test_get_club_points_dict_should_return_none_with_Exception(self, mocker, clubs_db_test):
+        """
+        GIVEN list of clubs dict
+        WHEN user access to index.html page
+        THEN checks the return is None
+        """
+        mocker.patch.object(models, 'clubs', clubs_db_test)
+        assert models.get_club_points_dict(
+            [{
+                "ERRORname": "Iron Temple",
+                "email": "admin@irontemple.com",
+                "points": "4"
+            }]
+        ) is None
+
 
 class TestCompetitions:
 
