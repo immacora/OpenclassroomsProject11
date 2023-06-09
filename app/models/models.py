@@ -52,3 +52,20 @@ def get_competition_by_name(competition_name):
         return [c for c in competitions if c['name'] == competition_name][0]
     except IndexError as e:
         print("Competition not found:", e)
+
+
+def get_club_points_dict(clubs):
+    """Returns the list of club points dict."""
+    club_points = []
+    try:
+        for club in clubs:
+            name = club["name"]
+            points = club["points"]
+            club = {
+                "name": name,
+                "points": points
+            }
+            club_points.append(club)
+        return club_points
+    except Exception as e:
+        print("Failed to extract club points:", e)

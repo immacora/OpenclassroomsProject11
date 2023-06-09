@@ -28,7 +28,7 @@ class TestGetPlusIntegerValue:
 class TestCalculateSubstraction:
     """
     GIVEN two numbers
-    WHEN we want to do a subtraction
+    WHEN a subtraction is necessary
     THEN checks the return is a positive integer or None
     """
     requested_places = 4

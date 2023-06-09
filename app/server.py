@@ -9,14 +9,34 @@ competitions = models.competitions
 
 @routes.route('/', methods=['GET'])
 def index():
-    """Entry point to Flask application displaying login form."""
-    return render_template('index.html')
+    """
+    Entry point to Flask application, return index.html.
+    global variables:
+        clubs: list
+    responses:
+        200: display login form and clubs points display board.
+        206: display login form only
+        500: none clubs or club_points_list.
+    """
+    if not clubs:
+        flash("500 Internal server error. \
+                Sorry, something went wrong. \
+                Please try again later and contact us if it persists.")
+        return render_template('index.html'), 500
+
+    club_points_list = models.get_club_points_dict(clubs)
+
+    if club_points_list:
+        return render_template('index.html', club_points=club_points_list)
+
+    flash("Sorry, something went wrong with the display of club_points.")
+    return render_template('index.html'), 206
 
 
 @routes.route('/show_summary', methods=['POST'])
 def show_summary():
     """
-    Show summary route, need to login with email.
+    Show competitions to book, need to login with email.
     global variables:
         clubs: list
         competitions: list
